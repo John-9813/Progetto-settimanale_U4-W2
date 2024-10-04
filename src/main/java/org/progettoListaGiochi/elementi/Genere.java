@@ -4,8 +4,8 @@ package org.progettoListaGiochi.elementi;
 public enum Genere {
     AZIONE,
     AVVENTURA,
-    Survival,
-    Moba,
+    SURVIVAL,
+    MOBA,
     MMO,
     STRATEGIA,
     RPG,
