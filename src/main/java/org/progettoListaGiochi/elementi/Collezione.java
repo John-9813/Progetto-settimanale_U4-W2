@@ -24,7 +24,7 @@ public class Collezione {
         return giochi.stream().filter(gioco -> gioco.getPrezzo() < prezzoLimite).collect(Collectors.toList());
     }
 
-    // Ricerca tramite numero di giocatori per i giochi da tavolo
+    // Ricerca tramite numero di giocatori per i giochi da tavolo ( ci ho perso 3 ore)
     public List<GiocoDaTavolo> ricercaPerNumeroGiocatori(int numeroGiocatori) {
         return giochi.stream().filter(gioco -> gioco instanceof GiocoDaTavolo).map(gioco -> (GiocoDaTavolo) gioco).filter(giocoDaTavolo -> giocoDaTavolo.getNumeroGiocatori() == numeroGiocatori).collect(Collectors.toList());
     }

@@ -1,11 +1,10 @@
 package org.progettoListaGiochi.main;
 
-import org.progettoListaGiochi.elementi.Collezione;
-import org.progettoListaGiochi.elementi.Genere;
-import org.progettoListaGiochi.elementi.GiocoDaTavolo;
-import org.progettoListaGiochi.elementi.Videogioco;
+import org.progettoListaGiochi.elementi.*;
 
 import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Main {
@@ -59,33 +58,33 @@ public class Main {
 
     // Metodo per aggiungere un gioco alla collezione
     private static void aggiungiGioco(Collezione collezione, Scanner scanner) {
-        System.out.print("Inserisci ID del gioco: ");
+        System.out.print("Inserisci ID del gioco:");
         String id = scanner.nextLine();
 
-        System.out.print("Inserisci titolo del gioco: ");
+        System.out.print("Inserisci titolo del gioco:");
         String titolo = scanner.nextLine();
 
-        System.out.print("Inserisci anno di pubblicazione: ");
+        System.out.print("Inserisci anno di publicazione:");
         int anno = scanner.nextInt();
         scanner.nextLine();
 
-        System.out.print("Inserisci prezzo del gioco: ");
+        System.out.print("Inserisci prezzo del gioco:");
         double prezzo = scanner.nextDouble();
         scanner.nextLine();
 
-        System.out.print("Il gioco è un videogioco o un gioco da tavolo (v = Videogioco/t = Da tavolo)? ");
+        System.out.print("Il gioco è un videogioco o un gioco da tavolo? (digita: v = Videogioco/t = Da tavolo) ");
         String tipo = scanner.nextLine().trim().toLowerCase();
 
-        // Gestione delle due possibilità di scelta
+        // Gestione delle due possibilità di scelta del tipo di gioco
         if (tipo.equals("v")) {
-            System.out.print("Inserisci piattaforma (PC, PS5, Xbox): ");
+            System.out.print("Inserisci piattaforma (PC, PS5, Xbox):");
             String piattaforma = scanner.nextLine();
 
-            System.out.print("Inserisci durata di gioco (in ore): ");
+            System.out.print("Inserisci durata di gioco (in ore):");
             int durataGioco = scanner.nextInt();
             scanner.nextLine();
 
-            System.out.print("Inserisci genere del videogioco: ");
+            System.out.print("Inserisci genere del videogioco:");
             String genereStr = scanner.nextLine();
             Genere genere = Genere.valueOf(genereStr.toUpperCase());
 
@@ -93,11 +92,11 @@ public class Main {
             collezione.aggiungiGioco(videogioco);
             System.out.println("Videogioco aggiunto con successo!");
         } else if (tipo.equals("t")) {
-            System.out.print("Inserisci numero di giocatori: ");
+            System.out.print("Inserisci numero di giocatori:");
             int numeroGiocatori = scanner.nextInt();
             scanner.nextLine();
 
-            System.out.print("Inserisci durata media circa della partita (in minuti): ");
+            System.out.print("Inserisci durata media circa della partita (in minuti):");
             int durataMedia = scanner.nextInt();
             scanner.nextLine();
 
@@ -109,5 +108,41 @@ public class Main {
         }
     }
 
- 
+    // Metodo per ricerca gioco tramite ID
+    private static void ricercaPerId(Collezione collezione, Scanner scanner) {
+        System.out.print("Inserisci l'ID del gioco da cercare: ");
+        String id = scanner.nextLine();
+
+        Optional<Gioco> gioco = collezione.ricercaPerId(id);
+        if (gioco.isPresent()) {
+            System.out.println("Gioco trovato: " + gioco.get());
+        } else {
+            System.out.println("Nessun gioco trovato con l'ID specificato.");
+        }
+    }
+
+    // Metodo per ricerca prezzo
+    private static void ricercaPerPrezzo(Collezione collezione, Scanner scanner) {
+        System.out.print("Inserisci il prezzo massimo: ");
+        double prezzo = scanner.nextDouble();
+        scanner.nextLine();
+
+        List<Gioco> risultati = collezione.ricercaPerPrezzo(prezzo);
+        System.out.println("Giochi con prezzo inferiore a " + prezzo + ":");
+        risultati.forEach(System.out::println);
+    }
+
+    // Metodo per ricerca giochi da tavolo in base al numero di giocatori
+    private static void ricercaPerNumeroGiocatori(Collezione collezione, Scanner scanner) {
+        System.out.print("Inserisci il numero di giocatori: ");
+        int numeroGiocatori = scanner.nextInt();
+        scanner.nextLine();
+
+        List<GiocoDaTavolo> risultati = collezione.ricercaPerNumeroGiocatori(numeroGiocatori);
+        System.out.println("Giochi da tavolo con " + numeroGiocatori + " giocatori:");
+        risultati.forEach(System.out::println);
+    }
+
+//    Non riesco a completare i metodi per via del tempo e di grossi problemi riscontrati nella risoluzione dei problemi,
+//    però l'aplicazione funziona fino a questo punto..
 }
