@@ -6,11 +6,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 // Classe che rappresenta una lista di giochi dove uso dei metodi per le ricerche e aggiunte in base agli attributi
-public class Collezioni {
+public class Collezione {
     // Creo la lista che contiene tutti i giochi
     public List<Gioco> giochi;
 
-    public void Collezione() {
+    public Collezione() {
         giochi = new ArrayList<>();
     }
 
@@ -37,6 +37,5 @@ public class Collezioni {
         }
         giochi.add(gioco);
     }
-
 
 }
